@@ -10,3 +10,5 @@ State* node0 = new State(start, 0);
 
 deque<State*> solution = A_solution(node0, target, 0.5);
 ~~~
+
+博客可参见[用A*算法解决15数码问题（8数码问题）c++](https://blog.csdn.net/qq_41506927/article/details/122467328)
