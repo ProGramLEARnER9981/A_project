@@ -6,8 +6,9 @@
 #include <unordered_map>
 #include <ctime>
 #include <set>
-#define SIZE 4
 using namespace std;
+
+#define SIZE 4
 typedef int table[SIZE][SIZE];   // to store the data
 
 typedef struct
@@ -30,11 +31,11 @@ public:
 	State(table, int);
 	~State();
 	int get_distance(unordered_map<int, pos>);   // city block distance
-	double evaluate(unordered_map<int, pos>);     
-	string get_str_num();
+	double evaluate(unordered_map<int, pos>, double);  // return fvalue = depth*alpha + distance
+	string get_str_num();  // data => string
 	
 
-	State* extend();
+	State* extend();  // generate a new node
 
 	void move_up();  // move zero
 	void move_left();
@@ -46,16 +47,17 @@ private:
 	table data;
 };
 
-
 struct cmp {
 	bool operator()(const State* a, const State* b) const
 	{
+		if (a->fvalue == b->fvalue)
+			return a < b;
 		return a->fvalue < b->fvalue;
 	}
 };
 
 unordered_map<int, pos> get_target_map(table target);   // write a table to a map
-deque<State*> A_solution(State*, table);    // the main fun
-State* process(State*, unordered_map<string, State*>&, multiset<State*, cmp>&,
-	unordered_map<string, State*>&, const unordered_map<int, pos>);
+deque<State*> A_solution(State*, table, double);    // the main fun
+State* process(State*, unordered_map<string, State*>&, set<State*, cmp>&,
+	unordered_map<string, State*>&, const unordered_map<int, pos>, double);  // analyse a new extend node
 string table2string(table);

@@ -1,7 +1,6 @@
 ﻿#include "State.h"
 using namespace std;
 
-
 int main()
 {
 	table target = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0 };
@@ -9,11 +8,8 @@ int main()
 	
 	State* node0 = new State(start, 0);
 
-	deque<State*> solution = A_solution(node0, target);
-	cout << solution.size() << endl;
-
-	//unordered_map<int, pos> target_map = get_target_map(target);
-	//cout << node0->evaluate(target_map) << endl;
+	deque<State*> solution = A_solution(node0, target, 0.5);
+	cout << solution.size() - 1<< endl;
 
 	return 0;
 }
